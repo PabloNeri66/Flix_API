@@ -1,0 +1,41 @@
+FAQ de Aprendizados Django – Perguntas e Respostas
+
+
+
+"Automatizei esse FAQ com o objetivo de relembrar e evidenciar minhas dúvidas e percepções sobre o projeto, Python e Django.
+Acredito que esse arquivo tem seu valor, pois demonstra um interesse genuíno que eu tive em entender além da construção do projeto.
+Isso vai além do aprendizado e conteúdo, mas uma busca de abstração do framework e de arquiteturas.
+Foi gratificante entender isso e com ajuda do curso da PycodeBR e GPT + Documentação Rest_framwork/Django, compartilho a vocês perguntas que me fiz na trilha.
+Está básico, por que tive a ideia no final do projeto. E não salvei minhas dúvidas..."
+
+
+
+
+1. Como calcular a média de um campo usando Django ORM?
+Explicação:
+Usamos o método aggregate() com a função Avg('campo') para calcular a média direto no banco, evitando carregar todos os objetos na memória. O resultado é um dicionário com a chave padrão no formato 'campo__avg'. Exemplo:
+obj.reviews.aggregate(Avg('stars'))['stars__avg']
+
+2. Por que usar related_name na ForeignKey?
+Explicação:
+related_name define o nome do atributo usado para acessar, do lado “1” (por exemplo, Movie), todos os objetos relacionados do lado “N” (Reviews). Isso permite fazer movie.reviews.all() para buscar todos os reviews daquele filme.
+
+3. O que significa o duplo underline (__) no Django ORM?
+Explicação:
+É a forma do ORM “navegar” por relacionamentos, campos ou aplicar filtros específicos. Por exemplo, 'reviews__stars' acessa o campo stars da tabela relacionada reviews. Também é usado para lookups e agregações, como 'stars__avg' para a média do campo.
+
+4. Quando usar um ou mais __ no Django ORM?
+Explicação:
+Cada __ representa um passo em um relacionamento ou um lookup. Se você precisa acessar um campo de uma tabela relacionada a outra tabela que está relacionada ao modelo inicial, você pode usar vários, ex: 'reviews__user__username'.
+
+5. Como acessar os valores de um queryset para fazer operações em Python?
+Explicação:
+Use values_list('campo', flat=True) para obter uma lista simples com os valores do campo. Assim, você pode aplicar funções como sum() e len() para calcular médias manualmente, mas a melhor prática é usar aggregate.
+
+6. Como criar campos dinâmicos no Serializer para valores calculados?
+Explicação:
+Usamos SerializerMethodField no serializer para criar campos que não existem no modelo, como a média das avaliações. É importante garantir que o método trata casos sem dados para evitar erros como UnboundLocalError.
+
+7. Qual a melhor forma para calcular médias: loop manual ou aggregate?
+Explicação:
+aggregate é mais eficiente porque delega o cálculo para o banco de dados, reduzindo uso de memória e processamento no Python. Loops manuais funcionam, mas são mais lentos e verbosos.
