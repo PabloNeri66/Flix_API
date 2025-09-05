@@ -6,11 +6,12 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from genres.serializers import GenreSerializer
 # Create your views here.
-
+from rest_framework.permissions import IsAuthenticated
 
 class GenreCreateListView(generics.ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permission_classes=(IsAuthenticated,)
 
 
 # @csrf_exempt
@@ -32,6 +33,7 @@ class GenreCreateListView(generics.ListCreateAPIView):
 class GenreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permission_classes=(IsAuthenticated,)
 
 
 
