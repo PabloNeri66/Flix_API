@@ -3,6 +3,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Auth
+    path('api/v1/', include('authentication.urls')),
     # Genre
     path('api/v1/', include('genres.urls')),
     # Actors
