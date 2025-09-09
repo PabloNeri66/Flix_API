@@ -1,0 +1,15 @@
+import psycopg2
+import os
+
+try:
+    conn = psycopg2.connect(
+        dbname="flix_api",
+        user="postgres",
+        password=os.environ.get('DB_PASSWORD'),
+        host="localhost",
+        port="5432"
+    )
+    print("Conectado com sucesso!")
+    conn.close()
+except Exception as e:
+    print(f"Erro na conexão: {e}")
