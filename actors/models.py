@@ -26,12 +26,10 @@ NATIONALITY_CHOICES = (
 )
 
 
-
 class Actor(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     birthday = models.DateField(blank=True, null=True, verbose_name='Data de Nascimento')
     nationality = models.CharField(max_length=100, null=True, blank=True, verbose_name='Nacionalidade', choices=NATIONALITY_CHOICES)
-
 
     def __str__(self):
         return self.name

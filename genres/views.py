@@ -8,10 +8,10 @@ from core.permissions import GlobalDefaultPermission
 class GenreCreateListView(generics.ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes=(IsAuthenticated, GlobalDefaultPermission,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
 
 
 class GenreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes=(IsAuthenticated, GlobalDefaultPermission,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
