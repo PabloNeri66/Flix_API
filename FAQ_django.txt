@@ -39,3 +39,18 @@ Usamos SerializerMethodField no serializer para criar campos que não existem no
 7. Qual a melhor forma para calcular médias: loop manual ou aggregate?
 Explicação:
 aggregate é mais eficiente porque delega o cálculo para o banco de dados, reduzindo uso de memória e processamento no Python. Loops manuais funcionam, mas são mais lentos e verbosos.
+
+8. Como o Django REST Framework entende que um campo sobrescrito (como genre) substitui o original no serializers?
+
+Explicação:
+O DRF associa os campos do serializer aos campos do modelo pelo nome da variável. Se você cria genre = GenreSerializer(), e o modelo tem um campo genre, o DRF entende que você quer sobrescrever aquele campo. Ele então substitui o campo padrão (que seria PrimaryKeyRelatedField) pelo seu serializer customizado.
+
+9. E se eu usar fields = '__all__' e também declarar genre = GenreSerializer()?
+
+Explicação:
+O campo manual declarado tem prioridade. Mesmo com __all__, o DRF usa GenreSerializer() no lugar do campo padrão. Ou seja, o campo genre será serializado como objeto (com seus atributos), e não como ID.
+
+10. O que acontece se o nome do campo sobrescrito no serializer for diferente do campo no modelo?
+
+Explicação:
+O DRF não reconhece que você está sobrescrevendo nada. Ele trata esse campo como um campo novo que não tem relação direta com o modelo. O campo original continuará sendo usado com o tipo padrão (ex: ID para FK). Para sobrescrever corretamente, o nome da variável deve ser exatamente igual ao nome do campo no modelo.

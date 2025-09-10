@@ -1,5 +1,4 @@
 from rest_framework import permissions
-from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 
 class GlobalDefaultPermission(permissions.BasePermission):
@@ -20,7 +19,6 @@ class GlobalDefaultPermission(permissions.BasePermission):
 
         return request.user.has_perm(model_permission_codename)
 
-
     def __get_model_permission_codename(self, method, view):
         
         try:
@@ -30,7 +28,6 @@ class GlobalDefaultPermission(permissions.BasePermission):
             return f'{app_label}.{action}_{model_name}'
         except AttributeError:
             return None
-    
 
     def __get_action_sufix(self, method):
         method_actions = {
