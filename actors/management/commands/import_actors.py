@@ -28,7 +28,7 @@ class Command(BaseCommand):
                     name = row['name']
                     birthday = datetime.strptime(
                         row['birthday'],
-                        format='%Y/%m/%d',
+                        '%Y-%m-%d',
                     ).date()
                     nationality = row['nationality']
                     logger.info(f'Ator {name} em processo de cadastro...')
